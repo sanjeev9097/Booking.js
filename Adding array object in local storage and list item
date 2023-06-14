@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>HTML Form</title>
+</head>
+<body>
+    <h1>Simple HTML Form</h1>
+
+    <!-- Dummy Form, on submitting goes nowhere -->
+    <form action="" id="form">
+
+        <label>Full Name : </label>
+        <input type="text" id="name"><br><br>
+        <label>Email : </label>
+        <input type="text" id="email"><br><br>
+        <label>Phone Number : </label>
+        <input type="number" id="phone"><br><br>
+        <input type="submit" value="Submit" id="submit">
+
+        <ul id="items" class="list-group">
+            
+        </ul>
+
+    </form> 
+
+    
+
+    <script src="script.js">
+        var form = document.getElementById('form');
+        var itemList = document.getElementById('items');
+
+        form.addEventListener('submit',action);
+
+        function action(e){
+            e.preventDefault();
+            let myData = {
+                Name : document.getElementById('name').value,
+                Email : document.getElementById('email').value,
+                Phone : document.getElementById('phone').value,
+            }
+
+            let myObj_serialized = JSON.stringify(myData);
+
+
+            localStorage.setItem(myData.Email,myObj_serialized);
+
+            
+
+            // Create new li
+            var li = document.createElement('li');
+
+
+            // ADD CLASS
+            li.className = 'list-group-item';
+            
+            // ADD TEXT NODE WITH INPUT VALUE
+
+            li.appendChild(document.createTextNode(myObj_serialized));
+
+            itemList.appendChild(li);
+
+
+        }
+
+    </script>
+
+</body>
+</html>
